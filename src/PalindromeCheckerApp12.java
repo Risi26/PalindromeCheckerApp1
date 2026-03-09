@@ -33,6 +33,33 @@ public class PalindromeCheckerApp12 {
             System.out.println("Result: The string is NOT a Palindrome.");
         }
 
+        String input = "radar";
+
+        char[] chars = input.toCharArray();
+
+        int start = 0;
+
+        int end = chars.length - 1;
+
+        boolean isPalindrome1 = true;
+
+        while (start < end) {
+
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+
+            start++;
+            end--;
+        }
+
+        if (isPalindrome) {
+            System.out.println("\"" + input + "\" is a palindrome.");
+        } else {
+            System.out.println("\"" + input + "\" is not a palindrome.");
+        }
+
     }
 }
 
