@@ -1,8 +1,4 @@
-import java.util.Queue;
-import java.util.Stack;
-import java.util.LinkedList;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 
 public class PalindromeCheckerApp12 {
@@ -138,6 +134,38 @@ public class PalindromeCheckerApp12 {
         } else {
             System.out.println("\"" + input + "\" is not a palindrome.");
         }
+
+        Scanner scanner = new Scanner(System.in);
+        LinkedList<Character> list = new LinkedList<>();
+
+        System.out.print("Enter a string: ");
+        String input33 = scanner.nextLine();
+
+        // Add characters to LinkedList
+        for (char c : input.toCharArray()) {
+            list.add(c);
+        }
+
+        boolean isPalindrome2 = true;
+
+        // Compare characters from both ends
+        while (list.size() > 1) {
+            char first = list.removeFirst();
+            char last = list.removeLast();
+
+            if (first != last) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        if (isPalindrome) {
+            System.out.println("The string is a palindrome.");
+        } else {
+            System.out.println("The string is NOT a palindrome.");
+        }
+
+        scanner.close();
     }
 }
 
