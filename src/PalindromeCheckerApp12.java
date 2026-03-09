@@ -166,7 +166,34 @@ public class PalindromeCheckerApp12 {
         }
 
         scanner.close();
+
+            String input7 = "racecar";
+
+            // Clean the string: remove spaces and convert to lowercase for accurate checking
+            String cleanedInput = input.replaceAll("\\s+", "").toLowerCase();
+
+            boolean isPalindrome5 = check(cleanedInput, 0, cleanedInput.length() - 1);
+
+            System.out.println("Is '" + input + "' a palindrome? " + isPalindrome);
+        }
+
+
+        private static boolean check(String s, int start, int end) {
+            // Base Case 1: If there is only one character or no characters left
+            if (start >= end) {
+                return true;
+            }
+
+            // Base Case 2: If characters at current positions don't match
+            if (s.charAt(start) != s.charAt(end)) {
+                return false;
+            }
+
+            // Recursive Step: Move inward by incrementing start and decrementing end
+            return check(s, start + 1, end - 1);
     }
+
+
 }
 
 
