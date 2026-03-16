@@ -1,42 +1,61 @@
+import java.util.Stack;
 
 public class PalindromeCheckerApp12 {
 
-
+    /**
+     * Application entry point for UC13.
+     * * @param args Command-line arguments
+     */
     public static void main(String[] args) {
-        String input = "A man a plan a canal Panama";
+        String input = "level";
 
-        // Create an instance of the service
-        PalindromeService service = new PalindromeService();
+        // Normalize input for accurate checking
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        // Use the service to check the palindrome
-        boolean result = service.checkPalindrome(input);
+        // Using the Stack-based strategy from previous use case
+        PalindromeStrategy strategy = new StackStrategy();
 
-        // Output results
+        // Capture Start Time in nanoseconds
+        long startTime = System.nanoTime();
+
+        // Execute algorithm
+        boolean isPalindrome = strategy.isValid(normalized);
+
+        // Capture End Time
+        long endTime = System.nanoTime();
+
+        // Calculate total execution duration
+        long duration = endTime - startTime;
+
+        // Display results
         System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + result);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Execution Time : " + duration + " ns");
     }
 }
 
+/**
+ * Interface for the Strategy Pattern.
+ */
+interface PalindromeStrategy {
+    boolean isValid(String text);
+}
 
-class PalindromeService {
-
-    public boolean checkPalindrome(String input) {
-        // Normalization (as established in previous use cases)
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-
-        // Initialize pointers from hint
-        int start = 0;
-        int end = normalized.length() - 1;
-
-        // Compare characters moving inward
-        while (start < end) {
-            if (normalized.charAt(start) != normalized.charAt(end)) {
-                return false; // Not a palindrome
-            }
-            start++;
-            end--;
+/**
+ * Concrete implementation using a Stack.
+ */
+class StackStrategy implements PalindromeStrategy {
+    @Override
+    public boolean isValid(String text) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : text.toCharArray()) {
+            stack.push(c);
         }
-
-        return true; // Is a palindrome
+        for (char c : text.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
