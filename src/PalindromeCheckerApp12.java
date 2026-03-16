@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class PalindromeCheckerApp12 {
 
     public static void main(String[] args) {
@@ -8,12 +7,9 @@ public class PalindromeCheckerApp12 {
         System.out.println("=======================================");
         System.out.println("   PALINDROME CHECKER MANAGEMENT APP   ");
         System.out.println("=======================================");
-        System.out.println("Welcome to the Palindrome Checker System!");
-        System.out.println("Version: 1.0");
-        System.out.println("System initialized successfully.");
-        System.out.println("---------------------------------------");
 
-        String text = "madam";   // Hardcoded string
+        // Method 1: Two pointer method
+        String text = "madam";
         boolean isPalindrome = true;
 
         int left = 0;
@@ -29,173 +25,136 @@ public class PalindromeCheckerApp12 {
         }
 
         System.out.println("Input String: " + text);
+        System.out.println("Result: " + (isPalindrome ? "Palindrome" : "Not Palindrome"));
 
-        if (isPalindrome) {
-            System.out.println("Result: The string is a Palindrome.");
-        } else {
-            System.out.println("Result: The string is NOT a Palindrome.");
-        }
-
+        // Method 2: Using char array
         String input = "radar";
-
         char[] chars = input.toCharArray();
 
         int start = 0;
-
         int end = chars.length - 1;
 
         boolean isPalindrome1 = true;
 
         while (start < end) {
-
             if (chars[start] != chars[end]) {
-                isPalindrome = false;
+                isPalindrome1 = false;
                 break;
             }
-
             start++;
             end--;
         }
 
-        if (isPalindrome) {
-            System.out.println("\"" + input + "\" is a palindrome.");
-        } else {
-            System.out.println("\"" + input + "\" is not a palindrome.");
-        }
+        System.out.println("\"" + input + "\" is " + (isPalindrome1 ? "Palindrome" : "Not Palindrome"));
 
+        // Method 3: Using Stack
         String input1 = "noon";
-
         Stack<Character> stack = new Stack<>();
 
-        for (char c : input.toCharArray()) {
+        for (char c : input1.toCharArray()) {
             stack.push(c);
         }
 
-        boolean isPalindrome12 = true;
+        boolean isPalindrome2 = true;
 
-        for (char c : input.toCharArray()) {
+        for (char c : input1.toCharArray()) {
             if (c != stack.pop()) {
-                isPalindrome = false;
+                isPalindrome2 = false;
                 break;
             }
         }
 
-        if (isPalindrome) {
-            System.out.println("\"" + input + "\" is a palindrome.");
-        } else {
-            System.out.println("\"" + input + "\" is not a palindrome.");
-        }
+        System.out.println("\"" + input1 + "\" is " + (isPalindrome2 ? "Palindrome" : "Not Palindrome"));
 
+        // Method 4: Queue + Stack
         String input2 = "civic";
 
         Queue<Character> queue = new LinkedList<>();
-
         Stack<Character> stack2 = new Stack<>();
 
-        for (char c : input.toCharArray()) {
+        for (char c : input2.toCharArray()) {
             queue.add(c);
-            stack.push(c);
+            stack2.push(c);
         }
 
         boolean isPalindrome3 = true;
 
         while (!queue.isEmpty()) {
-            if (queue.poll() != stack.pop()) {
-                isPalindrome = false;
+            if (queue.poll() != stack2.pop()) {
+                isPalindrome3 = false;
                 break;
             }
         }
 
-        if (isPalindrome) {
-            System.out.println("\"" + input + "\" is a palindrome.");
-        } else {
-            System.out.println("\"" + input + "\" is not a palindrome.");
-        }
+        System.out.println("\"" + input2 + "\" is " + (isPalindrome3 ? "Palindrome" : "Not Palindrome"));
 
-        String input6 = "refer";
+        // Method 5: Deque
+        String input3 = "refer";
 
         Deque<Character> deque = new ArrayDeque<>();
 
-        for (char c : input.toCharArray()) {
+        for (char c : input3.toCharArray()) {
             deque.addLast(c);
         }
 
-        boolean isPalindrome6 = true;
+        boolean isPalindrome4 = true;
 
         while (deque.size() > 1) {
             if (deque.removeFirst() != deque.removeLast()) {
-                isPalindrome = false;
+                isPalindrome4 = false;
                 break;
             }
         }
 
-        if (isPalindrome) {
-            System.out.println("\"" + input + "\" is a palindrome.");
-        } else {
-            System.out.println("\"" + input + "\" is not a palindrome.");
-        }
+        System.out.println("\"" + input3 + "\" is " + (isPalindrome4 ? "Palindrome" : "Not Palindrome"));
 
+        // Method 6: LinkedList with user input
         Scanner scanner = new Scanner(System.in);
-        LinkedList<Character> list = new LinkedList<>();
 
         System.out.print("Enter a string: ");
-        String input33 = scanner.nextLine();
+        String userInput = scanner.nextLine();
 
-        // Add characters to LinkedList
-        for (char c : input.toCharArray()) {
+        LinkedList<Character> list = new LinkedList<>();
+
+        for (char c : userInput.toCharArray()) {
             list.add(c);
         }
 
-        boolean isPalindrome2 = true;
+        boolean isPalindrome5 = true;
 
-        // Compare characters from both ends
         while (list.size() > 1) {
             char first = list.removeFirst();
             char last = list.removeLast();
 
             if (first != last) {
-                isPalindrome = false;
+                isPalindrome5 = false;
                 break;
             }
         }
 
-        if (isPalindrome) {
-            System.out.println("The string is a palindrome.");
-        } else {
-            System.out.println("The string is NOT a palindrome.");
-        }
+        System.out.println("User input is " + (isPalindrome5 ? "Palindrome" : "Not Palindrome"));
+
+        // Method 7: Recursive
+        String input4 = "racecar";
+
+        boolean isPalindrome6 = check(input4, 0, input4.length() - 1);
+
+        System.out.println("\"" + input4 + "\" is " + (isPalindrome6 ? "Palindrome" : "Not Palindrome"));
 
         scanner.close();
-
-            String input7 = "racecar";
-
-            // Clean the string: remove spaces and convert to lowercase for accurate checking
-            String cleanedInput = input.replaceAll("\\s+", "").toLowerCase();
-
-            boolean isPalindrome5 = check(cleanedInput, 0, cleanedInput.length() - 1);
-
-            System.out.println("Is '" + input + "' a palindrome? " + isPalindrome);
-        }
-
-
-        private static boolean check(String s, int start, int end) {
-            // Base Case 1: If there is only one character or no characters left
-            if (start >= end) {
-                return true;
-            }
-
-            // Base Case 2: If characters at current positions don't match
-            if (s.charAt(start) != s.charAt(end)) {
-                return false;
-            }
-
-            // Recursive Step: Move inward by incrementing start and decrementing end
-            return check(s, start + 1, end - 1);
     }
 
+    // Recursive method
+    private static boolean check(String s, int start, int end) {
 
+        if (start >= end) {
+            return true;
+        }
+
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        return check(s, start + 1, end - 1);
+    }
 }
-
-
-
-
